@@ -1,0 +1,7 @@
+#ifndef MENTAT_UI_H
+#define MENTAT_UI_H
+
+const char* UI_STRING =
+"@MENTAT_UI@";
+
+#endif
