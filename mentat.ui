@@ -30,11 +30,25 @@
             <property name="row-homogeneous">True</property>
             <property name="column-homogeneous">True</property>
             <child>
+              <object class="GtkButton" id="button_clear">
+                <property name="label" translatable="yes">C</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <signal name="clicked" handler="button_clear__clicked"/>
+                <layout>
+                    <property name="column">0</property>
+                    <property name="row">0</property>
+                </layout>
+              </object>
+            </child>
+            <child>
               <object class="GtkButton" id="button_div">
                 <property name="label" translatable="yes">/</property>
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
+                <signal name="clicked" handler="button_div__clicked"/>
                 <layout>
                     <property name="column">1</property>
                     <property name="row">0</property>
@@ -47,6 +61,7 @@
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
+                <signal name="clicked" handler="button_mul__clicked"/>
                 <layout>
                     <property name="column">2</property>
                     <property name="row">0</property>
@@ -59,6 +74,7 @@
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
+                <signal name="clicked" handler="button_sub__clicked"/>
                 <layout>
                     <property name="column">3</property>
                     <property name="row">0</property>
@@ -110,6 +126,7 @@
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
+                <signal name="clicked" handler="button_add__clicked"/>
                 <layout>
                     <property name="column">3</property>
                     <property name="row">1</property>
@@ -215,6 +232,7 @@
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
+                <signal name="clicked" handler="button_dot__clicked"/>
                 <layout>
                     <property name="column">2</property>
                     <property name="row">4</property>
@@ -227,6 +245,7 @@
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
+                <signal name="clicked" handler="button_enter__clicked"/>
                 <layout>
                     <property name="column">3</property>
                     <property name="row">3</property>
