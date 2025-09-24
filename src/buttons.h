@@ -81,7 +81,7 @@ void button_##NAME##__clicked(GtkButton* button, gpointer data){\
         break;\
     default:\
         for(int i = 0; i < 2; i++){\
-            gtk_text_buffer_get_iter_at_line(text_buffer, &iter, gtk_text_buffer_get_line_count(text_buffer) -1 );\
+            gtk_text_buffer_get_iter_at_line(text_buffer, &iter, gtk_text_buffer_get_line_count(text_buffer) );\
             gtk_text_iter_backward_char(&iter);\
             gtk_text_buffer_get_end_iter(text_buffer, &end_iter);\
             gtk_text_buffer_delete(text_buffer, &iter, &end_iter);\
