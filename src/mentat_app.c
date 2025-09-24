@@ -14,7 +14,7 @@
 
 static gboolean event_key_pressed(GtkWidget* window, guint keyval, guint keycode, GdkModifierType state, GtkEventControllerKey* event_controller)
 {
-    g_print("%s\n", gdk_keyval_name(keyval));
+    // g_print("%s\n", gdk_keyval_name(keyval));
     if(state & (GDK_CONTROL_MASK | GDK_ALT_MASK))
         return FALSE;
     switch(keyval){

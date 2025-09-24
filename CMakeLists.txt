@@ -31,3 +31,9 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/mentatui.h.in ${CMAKE_BINARY_DIR}/men
 target_link_libraries(mentat PRIVATE PkgConfig::GTK4)
 
 target_include_directories(mentat PRIVATE ${CMAKE_BINARY_DIR})
+
+include(GNUInstallDirs)
+
+install(TARGETS mentat
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+)

@@ -41,7 +41,6 @@ void button_## N ##__clicked(GtkButton* button, gpointer data){\
     }\
     state->input_buffer[state->input_buffer_cursor++] = '0' + N;\
     state->input_buffer[state->input_buffer_cursor] = '\0';\
-    g_print("%s\n", state->input_buffer);\
     gtk_text_buffer_insert_at_cursor(state->text_buffer, #N, 1);\
 }\
 
@@ -63,7 +62,6 @@ void button_##NAME##__clicked(GtkButton* button, gpointer data){\
     if(state->input_buffer_cursor == 0 && isnan(state->result)) return;\
     if(isnan(state->argument)){\
         state->argument = atof(state->input_buffer);\
-        g_print("%lf\n", state->argument);\
         state->input_buffer_cursor = 0;\
         state->input_buffer[state->input_buffer_cursor] = '\0';\
         gtk_text_buffer_insert_at_cursor(state->text_buffer, "\n", 1);\

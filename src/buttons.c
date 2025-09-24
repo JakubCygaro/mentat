@@ -5,7 +5,6 @@ void button_0__clicked(GtkButton* button, gpointer data){
     if((state->input_buffer_cursor == 0) || (state->input_buffer_cursor > 0 && state->input_buffer[0] != '0')){
         state->input_buffer[state->input_buffer_cursor++] = '0';
         state->input_buffer[state->input_buffer_cursor] = '\0';
-        g_print("%s\n", state->input_buffer);
         gtk_text_buffer_insert_at_cursor(state->text_buffer, "0", 1);
     }
 }
