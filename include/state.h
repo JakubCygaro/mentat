@@ -2,13 +2,14 @@
 #define STATE_H
 
 #include <gtk/gtk.h>
-enum STATE {
-    MENTAT_ARG1_PENDING,
-    MENTAT_OPERATOR_PENDING,
-    MENTAT_ARG2_PENDING,
-};
+typedef enum _INPUT_MASK {
+    INPUT_MASK_CLEAR = 0 << 0,
+    INPUT_MASK_ZERO = 1 << 0,
+    INPUT_MASK_NEG = 1 << 1,
+    INPUT_MASK_DECIMAL = 1 << 2
+}INPUT_MASK ;
 typedef struct _MentatAppState {
-    enum STATE state;
+    int input_mask;
     GtkTextBuffer* text_buffer;
     char* input_buffer;
     size_t input_buffer_len;

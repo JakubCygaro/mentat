@@ -17,7 +17,7 @@ void mentat_state_initialize(void){
     _state.input_buffer_len = 256;
     _state.input_buffer_cursor = 0;
     _state.input_buffer[_state.input_buffer_cursor] = '\0';
-    _state.state = MENTAT_ARG1_PENDING;
+    _state.input_mask = INPUT_MASK_CLEAR;
     struct lconv* locale = localeconv();
     _state.sep = *locale->decimal_point;
 }

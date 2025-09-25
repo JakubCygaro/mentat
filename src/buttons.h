@@ -30,14 +30,19 @@ NUM_BUTTON_CLICKED_DEF(9);
 #define NUM_BUTTON_CLICKED(N) \
 void button_## N ##__clicked(GtkButton* button, gpointer data){\
     MentatAppState* state = mentat_state_ptr();\
-    if(state->input_buffer[0] == '0'){\
+    if((state->input_mask & (INPUT_MASK_ZERO)) == INPUT_MASK_ZERO && (state->input_mask & (INPUT_MASK_DECIMAL)) != INPUT_MASK_DECIMAL){\
+        g_print("aha\n");\
+        state->input_mask &= ~INPUT_MASK_ZERO;\
         state->input_buffer_cursor--;\
         GtkTextIter iter;\
         GtkTextIter end_iter;\
-        gtk_text_buffer_get_iter_at_line(state->text_buffer, &iter, gtk_text_buffer_get_line_count(state->text_buffer) -1 );\
+        gtk_text_buffer_get_iter_at_line(state->text_buffer, &iter, gtk_text_buffer_get_line_count(state->text_buffer));\
         gtk_text_iter_backward_char(&iter);\
         gtk_text_buffer_get_end_iter(state->text_buffer, &end_iter);\
         gtk_text_buffer_delete(state->text_buffer, &iter, &end_iter);\
+    }\
+    else if((state->input_mask & (INPUT_MASK_DECIMAL)) == INPUT_MASK_DECIMAL){\
+        state->input_mask &= ~INPUT_MASK_ZERO;\
     }\
     state->input_buffer[state->input_buffer_cursor++] = '0' + N;\
     state->input_buffer[state->input_buffer_cursor] = '\0';\
@@ -48,18 +53,18 @@ void button_enter__clicked(GtkButton* button, gpointer data);
 void button_clear__clicked(GtkButton* button, gpointer data);
 void button_dot__clicked(GtkButton* button, gpointer data);
 
-#define OPERATOR_BUTTON_CLICKED_DEF(OP, NAME)\
+#define OPERATOR_BUTTON_CLICKED_DEF(NAME)\
 void button_##NAME##__clicked(GtkButton* button, gpointer data);
 
-OPERATOR_BUTTON_CLICKED_DEF('+', add);
-OPERATOR_BUTTON_CLICKED_DEF('-', sub);
-OPERATOR_BUTTON_CLICKED_DEF('*', mul);
-OPERATOR_BUTTON_CLICKED_DEF('/', div);
+OPERATOR_BUTTON_CLICKED_DEF(add);
+OPERATOR_BUTTON_CLICKED_DEF(sub);
+OPERATOR_BUTTON_CLICKED_DEF(mul);
+OPERATOR_BUTTON_CLICKED_DEF(div);
 
 #define OPERATOR_BUTTON_CLICKED(OP, NAME)\
 void button_##NAME##__clicked(GtkButton* button, gpointer data){\
     MentatAppState* state = mentat_state_ptr();\
-    if(state->input_buffer_cursor == 0 && isnan(state->result)) return;\
+    if(state->input_buffer_cursor == 0 && isnan(state->argument)) return;\
     if(isnan(state->argument)){\
         state->argument = atof(state->input_buffer);\
         state->input_buffer_cursor = 0;\
@@ -81,7 +86,7 @@ void button_##NAME##__clicked(GtkButton* button, gpointer data){\
         break;\
     default:\
         for(int i = 0; i < 2; i++){\
-            gtk_text_buffer_get_iter_at_line(text_buffer, &iter, gtk_text_buffer_get_line_count(text_buffer) );\
+            gtk_text_buffer_get_iter_at_line(text_buffer, &iter, gtk_text_buffer_get_line_count(text_buffer));\
             gtk_text_iter_backward_char(&iter);\
             gtk_text_buffer_get_end_iter(text_buffer, &end_iter);\
             gtk_text_buffer_delete(text_buffer, &iter, &end_iter);\
@@ -90,5 +95,6 @@ void button_##NAME##__clicked(GtkButton* button, gpointer data){\
         gtk_text_buffer_insert_at_cursor(state->text_buffer, str, 2);\
         state->operator = OP;\
     }\
+    state->input_mask = INPUT_MASK_CLEAR;\
 }
 #endif
