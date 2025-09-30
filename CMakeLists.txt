@@ -2,6 +2,10 @@ cmake_minimum_required(VERSION 3.80)
 
 project(mentat VERSION 1.0)
 
+if(NOT CMAKE_CONFIGURATION_TYPES AND CMAKE_BUILD_TYPE STREQUAL "")
+    set(CMAKE_BUILD_TYPE "Debug")
+endif()
+
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(GTK4 REQUIRED IMPORTED_TARGET gtk4 gmodule-export-2.0>=2.82.2)
 

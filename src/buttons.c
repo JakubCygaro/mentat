@@ -113,7 +113,7 @@ void button_dot__clicked(GtkButton* button, gpointer data){
 void button_sub__clicked(GtkButton* button, gpointer data)
 {
     MentatAppState* state = mentat_state_ptr();
-    if(state->input_buffer_cursor == 0 && (state->input_mask & INPUT_MASK_NEG) != INPUT_MASK_NEG){
+    if(state->input_buffer_cursor == 0 && state->operator != '\0' && (state->input_mask & INPUT_MASK_NEG) != INPUT_MASK_NEG){
         state->input_mask |= INPUT_MASK_NEG;
         state->input_buffer[state->input_buffer_cursor++] = '-';
         state->input_buffer[state->input_buffer_cursor] = '\0';
@@ -138,6 +138,7 @@ void button_sub__clicked(GtkButton* button, gpointer data)
     char str[2] = { '-', '\n' };
     switch (state->operator) {
     case '-':
+        // gtk_text_buffer_insert_at_cursor(state->text_buffer, "\n", 1);
         break;
     default:
         for (int i = 0; i < 2; i++) {
