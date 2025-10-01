@@ -8,13 +8,12 @@
 #include <glibconfig.h>
 #include <gtk/gtk.h>
 
-// static char css[] =
-// "#text_box{ font: 48px; color: magenta; }";
-//
+static char css[] =
+"textview { font: 30px serif; }";
+
 
 static gboolean event_key_pressed(GtkWidget* window, guint keyval, guint keycode, GdkModifierType state, GtkEventControllerKey* event_controller)
 {
-    // g_print("%s\n", gdk_keyval_name(keyval));
     if(state & (GDK_CONTROL_MASK | GDK_ALT_MASK))
         return FALSE;
     switch(keyval){
@@ -102,9 +101,9 @@ static GtkWindow* mentat_window_new(MentatApp* app)
     GdkDisplay* display = gdk_display_get_default();
     gtk_style_context_add_provider_for_display(display, GTK_STYLE_PROVIDER(provider), GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
-    // GBytes* css_bytes = g_bytes_new(css, strlen(css));
-    // gtk_css_provider_load_from_bytes(provider, css_bytes);
-    //
+    GBytes* css_bytes = g_bytes_new(css, strlen(css));
+    gtk_css_provider_load_from_bytes(provider, css_bytes);
+
 
     GtkEventController* event_controller;
     event_controller = gtk_event_controller_key_new();
