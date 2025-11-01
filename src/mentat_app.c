@@ -67,10 +67,12 @@ static gboolean event_key_pressed(GtkWidget* window, guint keyval, guint keycode
         break;
     case GDK_KEY_multiply:
     case GDK_KEY_KP_Multiply:
+    case GDK_KEY_asterisk:
         button_mul__clicked(NULL, NULL);
         break;
     case GDK_KEY_division:
     case GDK_KEY_KP_Divide:
+    case GDK_KEY_slash:
         button_div__clicked(NULL, NULL);
         break;
     case GDK_KEY_Return:
