@@ -52,6 +52,7 @@ void button_## N ##__clicked(GtkButton* button, gpointer data){\
 void button_enter__clicked(GtkButton* button, gpointer data);
 void button_clear__clicked(GtkButton* button, gpointer data);
 void button_dot__clicked(GtkButton* button, gpointer data);
+void button_backspace__clicked(GtkButton* button, gpointer data);
 
 #define OPERATOR_BUTTON_CLICKED_DEF(NAME)\
 void button_##NAME##__clicked(GtkButton* button, gpointer data);

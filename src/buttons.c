@@ -1,4 +1,6 @@
 #include "buttons.h"
+#include <gtk/gtk.h>
+#include <stdio.h>
 
 void button_0__clicked(GtkButton* button, gpointer data){
     MentatAppState* state = mentat_state_ptr();
@@ -156,3 +158,16 @@ void button_sub__clicked(GtkButton* button, gpointer data)
 OPERATOR_BUTTON_CLICKED('+', add);
 OPERATOR_BUTTON_CLICKED('*', mul);
 OPERATOR_BUTTON_CLICKED('/', div);
+
+void button_backspace__clicked(GtkButton* button, gpointer data){
+    MentatAppState* state = mentat_state_ptr();
+    if (state->input_buffer_cursor > 0){
+        state->input_buffer_cursor--;
+        state->input_buffer[state->input_buffer_cursor] = '\0';
+        GtkTextIter end_iter = {0};
+        gtk_text_buffer_get_end_iter(state->text_buffer, &end_iter);
+        GtkTextIter back_iter = end_iter;
+        gtk_text_iter_backward_char(&back_iter);
+        gtk_text_buffer_delete(state->text_buffer, &back_iter, &end_iter);
+    }
+}

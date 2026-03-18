@@ -86,6 +86,10 @@ static gboolean event_key_pressed(GtkWidget* window, guint keyval, guint keycode
     case GDK_KEY_Escape:
         button_clear__clicked(NULL, NULL);
         break;
+    case GDK_KEY_BackSpace:
+        button_backspace__clicked(NULL, NULL);
+        printf("BACKSPACE\n");
+        break;
     }
     return TRUE;
 }
